@@ -2,21 +2,136 @@ namespace LegacyApp.Tests;
 
 public class UserServiceTests
 {
+    private UserService _userService;
+    public UserServiceTests()
+    {
+        //Arrange
+        _userService = new UserService();
+    }
+
     [Fact]
-    public void AddUser_ReturnFalseWhenFirstNameIsEmpty()
+    public void AddUser_Return_False_When_First_Name_Is_Empty()
     {
         // Arrange
-        var userService = new UserService();
+        //var userService = new UserService();
         
         // Act
-        var result = userService.AddUser(
+        var result = _userService.AddUser(
             null,
             "Kowalski",
-            "kowalski",
+            "kowalski@pjwstk.edu.pl",
             DateTime.Parse("2000-01-01"),
             1);
 
         // Assert
+        Assert.False(result);
+    }
+    
+    [Fact]
+    public void AddUser_Return_False_When_Last_Name_Is_Empty()
+    {
+        // Arrange
+        //var userService = new UserService();
+        
+        // Act
+        var result = _userService.AddUser(
+            "Jan",
+            null,
+            "kowalski@pjwstk.edu.pl",
+            DateTime.Parse("2000-01-01"),
+            1);
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void AddUser_Return_False_When_Email_Doesnt_Contains_At_And_Dot_Sign()
+    {
+        //Act
+        var result = _userService.AddUser(
+            "Jan",
+            "Kowalski",
+            "kowalskipjwstkedupl",
+            DateTime.Parse("2000-01-01"),
+            1);
+        
+        //Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void AddUser_Return_False_When_Age_Younger_Than_21()
+    {
+        //Act
+        var result = _userService.AddUser(
+            "Jan",
+            "Kowalski",
+            "kowalski@pjwstk.edu.pl",
+            DateTime.Now.AddYears(-10),
+            1);
+        
+        //Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void AddUser_Return_True_When_Client_Type_Is_VeryImportantClient()
+    {
+        //Act
+        var result = _userService.AddUser(
+            "Jan",
+            "Kowalski",
+            "kowalski@pjwstk.edu.pl",
+            DateTime.Parse("2000-01-01"),
+            2);
+
+        //Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void AddUser_Return_True_When_Client_Type_Is_ImportantClient()
+    {
+        //Act
+        var result = _userService.AddUser(
+            "Jan",
+            "Kowalski",
+            "kowalski@pjwstk.edu.pl",
+            DateTime.Parse("2000-01-01"),
+            3);
+
+        //Assert
+        Assert.True(result);
+    }
+    
+    [Fact]
+    public void AddUser_Return_True_When_Client_Type_Is_NormalClient_And_CreditLimit_Over_500()
+    {
+        //Act
+        var result = _userService.AddUser(
+            "Jan",
+            "Kowalski",
+            "kowalski@pjwstk.edu.pl",
+            DateTime.Parse("2000-01-01"),
+            4);
+
+        //Assert
+        Assert.True(result);
+    }
+    
+    [Fact]
+    public void AddUser_Return_False_When_Client_Type_Is_NormalClient_And_CreditLimit_Under_500()
+    {
+        //Act
+        var result = _userService.AddUser(
+            "Jan",
+            "Kowalski",
+            "kowalski@pjwstk.edu.pl",
+            DateTime.Parse("2000-01-01"),
+            1);
+
+        //Assert
         Assert.False(result);
     }
 }
