@@ -23,7 +23,7 @@ namespace LegacyApp
             
             SetUsersCreditLimit(user);
 
-            if (IsCreaditLimitBelowThreshold(user)) return false;
+            if (IsCreditLimitBelowThreshold(user)) return false;
 
             UserDataAccess.AddUser(user);
             return true;
@@ -76,7 +76,7 @@ namespace LegacyApp
             }
         }
 
-        public bool IsCreaditLimitBelowThreshold(User user)
+        public bool IsCreditLimitBelowThreshold(User user)
         {
             return user.HasCreditLimit && user.CreditLimit < 500;
         }

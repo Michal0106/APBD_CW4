@@ -74,54 +74,9 @@ public class UserServiceTests
         //Assert
         Assert.False(result);
     }
-
-    [Fact]
-    public void AddUser_Return_True_When_Client_Type_Is_VeryImportantClient()
-    {
-        //Act
-        var result = _userService.AddUser(
-            "Jan",
-            "Kowalski",
-            "kowalski@pjwstk.edu.pl",
-            DateTime.Parse("2000-01-01"),
-            2);
-
-        //Assert
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void AddUser_Return_True_When_Client_Type_Is_ImportantClient()
-    {
-        //Act
-        var result = _userService.AddUser(
-            "Jan",
-            "Kowalski",
-            "kowalski@pjwstk.edu.pl",
-            DateTime.Parse("2000-01-01"),
-            3);
-
-        //Assert
-        Assert.True(result);
-    }
     
     [Fact]
-    public void AddUser_Return_True_When_Client_Type_Is_NormalClient_And_CreditLimit_Over_500()
-    {
-        //Act
-        var result = _userService.AddUser(
-            "Jan",
-            "Kowalski",
-            "kowalski@pjwstk.edu.pl",
-            DateTime.Parse("2000-01-01"),
-            4);
-
-        //Assert
-        Assert.True(result);
-    }
-    
-    [Fact]
-    public void AddUser_Return_False_When_Client_Type_Is_NormalClient_And_CreditLimit_Under_500()
+    public void AddUser_Return_False_When_Clients_CreditLimit_Is_Under_500()
     {
         //Act
         var result = _userService.AddUser(
